@@ -1,5 +1,6 @@
 package com.sky.controller.admin;
 
+import com.github.pagehelper.Page;
 import com.sky.dto.CategoryDTO;
 import com.sky.dto.CategoryPageQueryDTO;
 import com.sky.entity.Category;
@@ -37,5 +38,17 @@ public class CategoryController {
         log.info("新增分类:{}", categoryDTO);
         categoryService.addCategory(categoryDTO);
         return Result.success();
+    }
+
+    /**
+     * 分类分页查询
+     * @return
+     */
+    @GetMapping("/page")
+    @ApiOperation("分类分页查询")
+    public Result<PageResult> page(CategoryPageQueryDTO categoryPageQueryDTO) {
+        log.info("分类分页查询:{}", categoryPageQueryDTO);
+        PageResult pageResult = categoryService.page(categoryPageQueryDTO);
+        return Result.success(pageResult);
     }
 }
