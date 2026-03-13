@@ -58,4 +58,18 @@ public class CategoryServiceImpl implements CategoryService {
         long total = page.getTotal();
         return new PageResult(total, records);
     }
+
+    /**
+     * 修改分类信息
+     * @param status
+     * @param id
+     */
+    public void startOrStop(Integer status, Long id) {
+        Category category = Category.builder()
+                .id(id)
+                .status(status)
+                .build();
+
+        categoryMapper.update(category);
+    }
 }
