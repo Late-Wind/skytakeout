@@ -103,7 +103,7 @@ public class EmployeeController {
     }
 
     /**
-     * 启用禁用游戏账号
+     * 启用禁用员工账号
      * @param status
      * @param id
      * @return
@@ -113,6 +113,27 @@ public class EmployeeController {
     public Result startOrStop(@PathVariable Integer status, long id) {
         log.info("员工id：{},(1启用,0禁用):{}", id, status);
         employeeService.startOrStop(status, id);
+        return Result.success();
+    }
+
+    @GetMapping("/{id}")
+    @ApiOperation("通过id查询员工信息")
+    public Result<Employee> getById(@PathVariable Long id) {
+        log.info("查询员工:{}", id);
+        Employee employee = employeeService.getById(id);
+        return Result.success(employee);
+    }
+
+    /**
+     * 修改员工信息
+     * @param employeeDTO
+     * @return
+     */
+    @PutMapping
+    @ApiOperation("修改员工信息")
+    public Result editEmployee(@RequestBody EmployeeDTO employeeDTO) {
+        log.info("修改员工信息:{}", employeeDTO);
+        employeeService.update(employeeDTO);
         return Result.success();
     }
 
