@@ -95,7 +95,7 @@ public class CategoryServiceImpl implements CategoryService {
             throw new DeletionNotAllowedException(MessageConstant.CATEGORY_BE_RELATED_BY_DISH);
         }
 
-        // 若该分类下有菜品则无法删除
+        // 若该分类下有套餐则无法删除
         Integer setmealCount = setmealMapper.countByCategoryId(id);
         if(setmealCount > 0) {
             throw new DeletionNotAllowedException(MessageConstant.CATEGORY_BE_RELATED_BY_SETMEAL);
