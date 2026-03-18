@@ -22,6 +22,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -122,6 +123,7 @@ public class DishServerImpl implements DishService {
      * 修改菜品
      * @param dishDTO
      */
+    @Transactional
     public void editDish(DishDTO dishDTO) {
         // 修改菜品基本信息
         Dish dish = new Dish();
@@ -144,6 +146,7 @@ public class DishServerImpl implements DishService {
      * 批量删除菜品
      * @param ids
      */
+    @Transactional
     public void deleteDishBatch(List<Long> ids) {
         // 判断当前菜品能否被删除(是否存在起售中的菜品)
 //        for(Long id : ids) {

@@ -21,6 +21,7 @@ import org.apache.commons.collections4.iterators.EmptyOrderedIterator;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 
 import java.time.LocalDateTime;
@@ -72,6 +73,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      * 新增员工
      * @param employeeDTO
      */
+    @Transactional
     public void save(EmployeeDTO employeeDTO) {
         Employee employee = new Employee();
 
@@ -143,6 +145,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      * 修改员工信息
      * @param employeeDTO
      */
+    @Transactional
     public void update(EmployeeDTO employeeDTO) {
         Employee employee = new Employee();
         BeanUtils.copyProperties(employeeDTO, employee);
@@ -157,6 +160,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      * 修改员工密码
      * @param passwordEditDTO
      */
+    @Transactional
     public void editPassword(PasswordEditDTO passwordEditDTO) {
         Long id = passwordEditDTO.getEmpId();
         Employee employee = employeeMapper.getById(id);

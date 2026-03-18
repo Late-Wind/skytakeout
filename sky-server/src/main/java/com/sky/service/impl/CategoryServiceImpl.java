@@ -16,6 +16,7 @@ import com.sky.service.CategoryService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -34,6 +35,7 @@ public class CategoryServiceImpl implements CategoryService {
      *
      * @param categoryDTO
      */
+    @Transactional
     public void addCategory(CategoryDTO categoryDTO) {
         // 创建新分类实体，复制属性
         Category category = new Category();
@@ -76,8 +78,6 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = Category.builder()
                 .id(id)
                 .status(status)
-                .updateTime(LocalDateTime.now())
-                .updateUser(BaseContext.getCurrentId())
                 .build();
 
         categoryMapper.update(category);
@@ -87,7 +87,7 @@ public class CategoryServiceImpl implements CategoryService {
      * 删除分类
      * @param id
      */
-    // TODO 增加分类下查询
+    @Transactional
     public void deleteById(Long id) {
         // 若该分类下有菜品则无法删除
         Integer dishCount = dishMapper.countByCategoryId(id);
@@ -107,6 +107,7 @@ public class CategoryServiceImpl implements CategoryService {
      * 修改分类
      * @param categoryDTO
      */
+    @Transactional
     public void editCategory(CategoryDTO categoryDTO) {
         Category category = new Category();
 
