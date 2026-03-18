@@ -8,6 +8,7 @@ import com.sky.enumeration.OperationType;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
@@ -45,5 +46,18 @@ public interface CategoryMapper {
     @Delete("delete from category where id = #{id}")
     void deleteById(Long id);
 
+    /**
+     * 根据类型查询分类
+     * @param type
+     * @return
+     */
     List<Category> list(Integer type);
+
+    /**
+     * 根据主键查询分类
+     * @param id
+     * @return
+     */
+    @Select("select * from category where id = #{id}")
+    Category queryById(Long id);
 }
