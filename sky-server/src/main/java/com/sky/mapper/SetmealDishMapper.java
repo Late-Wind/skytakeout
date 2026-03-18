@@ -7,5 +7,10 @@ import java.util.List;
 @Mapper
 public interface SetmealDishMapper {
 
+    /**
+     * 通过菜品id查询套餐id
+     * @param dishIds
+     * @return
+     */
     List<Long> getSetmealIdsByDishIds(List<Long> dishIds);
 }
