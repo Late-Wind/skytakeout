@@ -13,6 +13,7 @@ public interface DishFlavorMapper {
 
     /**
      * 插入口味数据
+     *
      * @param dishFlavor
      */
     @Insert("insert into dish_flavor (id, dish_id, name, value) " +
@@ -21,12 +22,14 @@ public interface DishFlavorMapper {
 
     /**
      * 批量插入口味数据
+     *
      * @param dishFlavors
      */
     void addBatch(List<DishFlavor> dishFlavors);
 
     /**
      * 根据菜品id查找口味信息
+     *
      * @param dishId
      * @return
      */
@@ -39,4 +42,10 @@ public interface DishFlavorMapper {
      */
     @Delete("delete from dish_flavor where dish_id = #{dishId}")
     void deleteByDishId(Long dishId);
+
+    /**
+     * 根据菜品id批量删除对应口味表数据
+     * @param dishIds
+     */
+    void deleteByDishIds(List<Long> dishIds);
 }

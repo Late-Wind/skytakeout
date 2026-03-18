@@ -47,11 +47,18 @@ public interface DishMapper {
     List<Dish> getByCategoryId(Long categoryId);
 
     /**
-     * 根据id查询菜品,返回DishVO
+     * 根据id查询菜品
      * @param id
      * @return
      */
+    @Select("select * from dish where id = #{id}")
     Dish getById(Long id);
+
+    /**
+     * 批量查找菜品
+     * @param ids
+     */
+    List<Dish> getByIds(List<Long> ids);
 
     /**
      * 修改菜品信息
@@ -62,7 +69,14 @@ public interface DishMapper {
 
     /**
      * 删除菜品
+     * @param id
      */
     @Delete("delete from dish where id = #{id}")
     void deleteById(Long id);
+
+    /**
+     * 批量删除菜品
+     * @param ids
+     */
+    void deleteByIds(List<Long> ids);
 }

@@ -146,9 +146,16 @@ public class DishServerImpl implements DishService {
      */
     public void deleteDishBatch(List<Long> ids) {
         // 判断当前菜品能否被删除(是否存在起售中的菜品)
-        for(Long id : ids) {
-            Dish dish = dishMapper.getById(id);
-
+//        for(Long id : ids) {
+//            Dish dish = dishMapper.getById(id);
+//
+//            if(dish.getStatus() == StatusConstant.ENABLE) {
+//                throw new DeletionNotAllowedException(MessageConstant.DISH_ON_SALE);
+//            }
+//        }
+        // 批量查询
+        List<Dish> dishes = dishMapper.getByIds(ids);
+        for (Dish dish : dishes) {
             if(dish.getStatus() == StatusConstant.ENABLE) {
                 throw new DeletionNotAllowedException(MessageConstant.DISH_ON_SALE);
             }
@@ -161,11 +168,14 @@ public class DishServerImpl implements DishService {
         }
 
         // 删除菜品表中的数据
-        for (Long id : ids) {
-            dishMapper.deleteById(id);
-            // 删除口味表中的数据(如果存在)
-            dishFlavorMapper.deleteByDishId(id);
-        }
+//        for (Long id : ids) {
+//            dishMapper.deleteById(id);
+//            // 删除口味表中的数据(如果存在)
+//            dishFlavorMapper.deleteByDishId(id);
+//        }
+        // 批量删除
+        dishMapper.deleteByIds(ids);
+        dishFlavorMapper.deleteByDishIds(ids);
     }
 
     /**
